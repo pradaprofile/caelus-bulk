@@ -7,6 +7,7 @@
 // @match        *://*.caelus.lol/develop*
 // @grant        GM_xmlhttpRequest
 // @connect      www.rblxtools.net
+// @connect      rblxtools.net
 // @connect      discord.com
 // @connect      caelus.lol
 // @connect      www.caelus.lol
@@ -20,8 +21,7 @@
     'use strict';
 
     const CURRENT_VERSION = 1.1;
-    // Make sure this matches the exact raw URL of your script file on GitHub
-    const UPDATE_RAW_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/caelus-uploader.user.js";
+    const UPDATE_RAW_URL = "https://raw.githubusercontent.com/pradaprofile/caelus-bulk/main/caelus-uploader.user.js";
 
     const STORAGE_KEY = "caelus_public_queue_v1.1";
     const PREFIX_KEY = "caelus_public_prefix_v1.1";
@@ -43,8 +43,6 @@
 
     // ── GITHUB AUTO UPDATE CHECKER ──
     function checkLiveUpdates() {
-        if (UPDATE_RAW_URL.includes("YOUR_GITHUB_USERNAME")) return; // Skip if placeholders aren't replaced yet
-        
         GM_xmlhttpRequest({
             method: "GET",
             url: UPDATE_RAW_URL,
@@ -224,7 +222,7 @@
             sendDiscordLog("upload", item.id, item.name, "Asset image compiled and successfully injected into standard creation processing queue.");
 
             queue.shift(); saveQueue();
-            await new Promise(r => setTimeout(r, 7500));
+            await new Promise(r => setTimeout(r, 12000));
         } catch (e) {
             queue.shift(); saveQueue();
         }
