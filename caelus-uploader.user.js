@@ -150,7 +150,7 @@
         });
     }
 
-    function parseInputRows(text, globalColorInput) {
+function parseInputRows(text, globalColorInput) {
         const lines = text.split("\n").map(l => l.trim());
         const itemsToAdd = [];
         let defaultColor = globalColorInput ? globalColorInput.trim() : "pink";
@@ -166,10 +166,10 @@
             if (line.includes("|")) {
                 const segments = line.split("|");
                 const potentialName = segments[0].replace(extractedId, "").replace(/[♡|]/g, "").trim();
-                assignedName = potentialName ? potentialName : defaultColor;
+                assignedName = potentialName ? `♡ ${potentialName} | juicy dress model barb ro-gangster ayesha 2000s y2k barbie grunge doll goth` : `♡ ${defaultColor} | juicy dress model barb ro-gangster ayesha 2000s y2k barbie grunge doll goth`;
             } else {
                 const rawLineText = line.replace(extractedId, "").replace(/[♡|]/g, "").trim();
-                assignedName = rawLineText ? rawLineText : defaultColor;
+                assignedName = rawLineText ? `♡ ${rawLineText} | juicy dress model barb ro-gangster ayesha 2000s y2k barbie grunge doll goth` : `♡ ${defaultColor} | juicy dress model barb ro-gangster ayesha 2000s y2k barbie grunge doll goth`;
             }
 
             itemsToAdd.push({ id: extractedId, name: assignedName });
@@ -201,8 +201,10 @@
             setStatus(`Processing: ${item.id}`, "#2563eb");
             const blob = await fetchImage(item.id);
             
-            const nameInput = document.querySelector("input.inputItemName-0-2-87") || document.querySelector('input[placeholder*="Name"]');
-            if(nameInput) setNativeInputValue(nameInput, item.name);
+const nameInput = document.querySelector('input[placeholder*="Name"]') || 
+                              document.querySelector('input[name="name"]') || 
+                              document.querySelector('input[id*="name"]') || 
+                              document.querySelector("input[class*='inputItemName']");            if(nameInput) setNativeInputValue(nameInput, item.name);
             await new Promise(r => setTimeout(r, 500));
 
             const fileInput = document.querySelector('input[type="file"]');
