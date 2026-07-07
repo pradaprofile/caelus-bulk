@@ -157,7 +157,7 @@ function parseInputRows(text, globalColorInput) {
 
         lines.forEach(line => {
             if (!line) return;
-            const matches = line.match(/\b\d{5,14}\b/);
+            const matches = line.match(/\b\d{5,17}\b/);
             if (!matches) return;
 
             const extractedId = matches[0];
